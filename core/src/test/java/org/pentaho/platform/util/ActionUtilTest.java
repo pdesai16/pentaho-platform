@@ -199,50 +199,50 @@ public class ActionUtilTest {
 
     // null map
     result = ActionUtil.generateWorkItemUid( map );
-    assertEquals( "WI-" + currentTime, result );
+    assertEquals( "WI-", result );
 
     // empty map
     map = new HashMap();
     result = ActionUtil.generateWorkItemUid( map );
-    assertEquals( "WI-" + currentTime, result );
+    assertEquals( "WI-", result );
 
     // quartz username only
     map = new HashMap();
     map.put( ActionUtil.QUARTZ_ACTIONUSER, "quartzAdmin" );
     result = ActionUtil.generateWorkItemUid( map );
-    assertEquals( "WI-quartzAdmin-" + currentTime, result );
+    assertEquals( "WI-quartzAdmin", result );
 
     // action username only
     map = new HashMap();
     map.put( ActionUtil.INVOKER_ACTIONUSER, "actionAdmin" );
     result = ActionUtil.generateWorkItemUid( map );
-    assertEquals( "WI-actionAdmin-" + currentTime, result );
+    assertEquals( "WI-actionAdmin", result );
 
     // quartz and action username
     map = new HashMap();
     map.put( ActionUtil.QUARTZ_ACTIONUSER, "quartzAdmin" );
     map.put( ActionUtil.INVOKER_ACTIONUSER, "actionAdmin" );
     result = ActionUtil.generateWorkItemUid( map );
-    assertEquals( "WI-actionAdmin-" + currentTime, result );
+    assertEquals( "WI-actionAdmin", result );
 
     // quartz username only
     map = new HashMap();
     map.put( ActionUtil.QUARTZ_STREAMPROVIDER_INPUT_FILE, "quartzInputFile" );
     result = ActionUtil.generateWorkItemUid( map );
-    assertEquals( "WI-quartzInputFile-" + currentTime, result );
+    assertEquals( "WI-quartzInputFile-", result );
 
     // action username only
     map = new HashMap();
     map.put( ActionUtil.INVOKER_STREAMPROVIDER_INPUT_FILE, "adminInputFile" );
     result = ActionUtil.generateWorkItemUid( map );
-    assertEquals( "WI-adminInputFile-" + currentTime, result );
+    assertEquals( "WI-adminInputFile-", result );
 
     // quartz and action username
     map = new HashMap();
     map.put( ActionUtil.QUARTZ_STREAMPROVIDER_INPUT_FILE, "quartzInputFile" );
     map.put( ActionUtil.INVOKER_STREAMPROVIDER_INPUT_FILE, "adminInputFile" );
     result = ActionUtil.generateWorkItemUid( map );
-    assertEquals( "WI-adminInputFile-" + currentTime, result );
+    assertEquals( "WI-adminInputFile-", result );
 
     // all values present
     map = new HashMap();
@@ -251,7 +251,7 @@ public class ActionUtilTest {
     map.put( ActionUtil.QUARTZ_ACTIONUSER, "quartzAdmin" );
     map.put( ActionUtil.INVOKER_ACTIONUSER, "actionAdmin" );
     result = ActionUtil.generateWorkItemUid( map );
-    assertEquals( "WI-adminInputFile-actionAdmin-" + currentTime, result );
+    assertEquals( "WI-adminInputFile-actionAdmin", result );
 
   }
 
@@ -263,25 +263,25 @@ public class ActionUtilTest {
 
     // simple case
     result = ActionUtil.generateWorkItemUid( "Test.prpt", "admin" );
-    assertEquals( "WI-Test_prpt-admin-" + currentTime, result );
+    assertEquals( "WI-Test_prpt-admin" , result );
 
     // bad characters
     result = ActionUtil.generateWorkItemUid( "!@#$%^&*.prpt", "adm&*&in" );
-    assertEquals( "WI-_prpt-adm_in-" + currentTime, result );
+    assertEquals( "WI-_prpt-adm_in" , result );
 
     // all bad characters
     result = ActionUtil.generateWorkItemUid( "!@#$%^&*.prpt", "&*&(*&" );
-    assertEquals( "WI-_prpt-_-" + currentTime, result );
+    assertEquals( "WI-_prpt-_" , result );
 
     // file path and spaces
     result = ActionUtil.generateWorkItemUid( "folder/Test File.prpt", "adm&*&in" );
-    assertEquals( "WI-Test_File_prpt-adm_in-" + currentTime, result );
+    assertEquals( "WI-Test_File_prpt-adm_in" , result );
 
     // missing user and file
     result = ActionUtil.generateWorkItemUid( "", "" );
-    assertEquals( "WI-" + currentTime, result );
+    assertEquals( "WI-", result );
     result = ActionUtil.generateWorkItemUid( null, null );
-    assertEquals( "WI-" + currentTime, result );
+    assertEquals( "WI-", result );
   }
 
   @Test

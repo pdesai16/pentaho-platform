@@ -257,9 +257,9 @@ public class ActionUtil {
 
   /**
    * Returns a unique id for a work item which includes the input file name (derived from {@code inputFilePath}),
-   * {@code user} and {@code date}, in the following format: WI-%input file name%-%user%-%date%, stripping any
+   * {@code user} and {@code date}, in the following format: WI-%input file name%-%user%, stripping any
    * invalid characters.
-   *
+   * This workItemUid will be used for logging only.
    * @param inputFilePath the path of the input file of the action being invoked - optional
    * @param userName      the user executing the action
    * @return a unique id for the work item
@@ -280,8 +280,7 @@ public class ActionUtil {
     final String sanitizedInputFileName = inputFileName.replaceAll( WORK_ITEM_UID_INVALID_CHARS, "_" );
     final String sanitizedUserName = ( userName == null ? "" : userName ).replaceAll( WORK_ITEM_UID_INVALID_CHARS, "_" );
 
-    String workItemUid = String.format( "WI-%s-%s-%s", sanitizedInputFileName, sanitizedUserName,
-      System.currentTimeMillis() );
+    String workItemUid = String.format( "WI-%s-%s", sanitizedInputFileName, sanitizedUserName);
     // remove any double dash, in case user name or inputFileName is missing
     workItemUid = workItemUid.replaceAll( "[-]+", "-" );
 
